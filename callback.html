@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Geni Callback</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #fffdf8;
+      color: #222;
+      display: grid;
+      min-height: 100vh;
+      place-items: center;
+    }
+    main {
+      max-width: 760px;
+      padding: 32px 20px;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #f4efe6;
+      padding: 16px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Geni Authorization Callback</h1>
+    <p>This page captures the URL fragment returned by Geni after authorization.</p>
+    <pre id="out">Waiting for authorization response...</pre>
+    <script>
+      document.getElementById("out").textContent =
+        window.location.href;
+    </script>
+  </main>
+</body>
+</html>
