@@ -30,11 +30,30 @@
 <body>
   <main>
     <h1>Geni Authorization Callback</h1>
-    <p>This page captures the URL fragment returned by Geni after authorization.</p>
+    <p>This page captures the token returned by Geni after authorization.</p>
     <pre id="out">Waiting for authorization response...</pre>
     <script>
-      document.getElementById("out").textContent =
-        window.location.href;
+      const out = document.getElementById("out");
+      const hash = window.location.hash.startsWith("#")
+        ? window.location.hash.slice(1)
+        : "";
+      const params = new URLSearchParams(hash);
+      const accessToken = params.get("access_token");
+      const expiresIn = params.get("expires_in");
+      const status = params.get("status");
+      const message = params.get("message");
+
+      if (accessToken) {
+        out.textContent =
+          "access_token: " + accessToken + "\n" +
+          "expires_in: " + (expiresIn || "unknown");
+      } else if (status || message) {
+        out.textContent =
+          "status: " + (status || "") + "\n" +
+          "message: " + (message || "");
+      } else {
+        out.textContent = window.location.href;
+      }
     </script>
   </main>
 </body>
